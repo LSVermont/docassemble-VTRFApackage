@@ -816,7 +816,7 @@ subject: About coercive control
 content: |
   Vermont law now includes coercive controlling behavior as abuse. Here is the statute.
   
-  (2) “Coercive controlling behavior” means a pattern of behavior that in purpose or effect unreasonably interferes with a person’s free will and personal liberty.  “Coercive controlling behavior” includes unreasonably engaging in any of the following:
+  (2) “Coercive controlling behavior” means a pattern of behavior that in purpose or effect **unreasonably** interferes with a person’s free will and personal liberty.  “Coercive controlling behavior” includes unreasonably engaging in any of the following:
   
   (A) isolating the family or household member from friends, relatives or other sources of support;
   
@@ -826,9 +826,9 @@ content: |
   
   (D) compelling the family or household member by force, threat or intimidation, including threats based on actual or suspected immigration status, to:
   
-    (i) engage in conduct from which such family or household member has a right to abstain; or
+    * (i) engage in conduct from which such family or household member has a right to abstain; or
   
-    (ii) abstain from conduct that such family or household member has a right to pursue;
+    * (ii) abstain from conduct that such family or household member has a right to pursue;
   
   (E) committing or threatening to commit cruelty to animals that intimidates the family or household member; or
   
@@ -1007,11 +1007,12 @@ subquestion: |
 fields:
     
   - note: |
-      Check all that apply to this incident. Select at least one statement.
       
       ${ collapse_template(coercive_control) }
 
       ${ collapse_template(stalking) }
+      
+      Check all that apply to this incident. Select at least one statement.
 
   - "The defendant caused or attempted to cause physical harm": recent_incident_harm
     datatype: yesno
@@ -1058,15 +1059,18 @@ fields:
       ---
     show if: recent_incident_assault
 
-  - "The defendant coercively controlled you and/or the child/children. Coercive control is defined in Vermont law here: [15 V.S.A. § 1101(2)](https://legislature.vermont.gov/statutes/section/15/021/01101)": recent_incident_coersive
+  - "The defendant coercively controlled you and/or the child/children. Coercive control is defined in Vermont law here: [15 V.S.A. § 1101(2)](https://legislature.vermont.gov/statutes/section/15/021/01101)": recent_incident_coercive
     datatype: yesno
 
-
-
+  - "When did this abusive behavior first start?": recent_incident_coercive_start_date
+    maxlength: 14
+    show if: recent_incident_coercive  
+    
   - "When was the most recent incident?": recent_incident_date
     maxlength: 14
   - note: |
       If you know the exact date, use this date format mm/dd/yyyy. If you don’t, it’s OK to type something short like “December 20XX.”
+    
   - "What was the time of the most recent incident? You can estimate if you don't know for sure.": recent_incident_time
     required: False
     maxlength: 16
@@ -1115,7 +1119,7 @@ fields:
 validation code: |
   if (recent_incident_state == "") and (other_recent_incident_state == ""):
     validation_error("You must enter a state in the United States, or an area outside of the United States")
-  if not recent_incident_harm and not recent_incident_fear and not recent_incident_abused and not recent_incident_stalked and not recent_incident_assault and not recent_incident_coersive:
+  if not recent_incident_harm and not recent_incident_fear and not recent_incident_abused and not recent_incident_stalked and not recent_incident_assault and not recent_incident_coercive:
     validation_error("Select at least one incident")
 ---
 id: Was recent most serious too
@@ -2624,6 +2628,10 @@ review:
     - recent_incident_description
     button: |
       **Most recent incident**
+     
+       % if defined("recent_incident_coercive") and recent_incident_coercive:
+      - Date when abusive behavior first started: **${ recent_incident_coercive_start_date }**
+      % endif
       
       - Date of the most recent incident: **${ recent_incident_date }**
       
@@ -2687,7 +2695,11 @@ review:
       
       % endif
 
-
+      % if defined("recent_incident_coercive") and recent_incident_coercive:
+      
+      - The defendant coercively controlled you and/or the child/children: **${ yesno(recent_incident_coercive) }**
+      
+      % endif
 
   - Edit:
     - recent_incident_most_serious
@@ -3255,6 +3267,7 @@ attachment:
       - "existing_order_OP_attorney": ${ existing_order_OP_attorney }
       - "recent_incident_yes": ${ True }
       - "recent_incident_date": ${ recent_incident_date }
+      - "recent_incident_coercive_start_date": ${ recent_incident_coercive_start_date }
       - "recent_incident_users1": ${ recent_incident_users1 }
       - "recent_incident_children": ${ recent_incident_children }
       - "recent_incident_children_names": |
@@ -3274,6 +3287,7 @@ attachment:
       - "recent_incident_assault_children": ${ recent_incident_assault_children }
       - "recent_incident_assault": ${ recent_incident_assault }
       - "recent_incident_assault_users1": ${ recent_incident_assault_users1 }
+      - "recent_incident_coercive": ${ recent_incident_coercive }
       - "danger_more_abuse": ${ danger_more_abuse }
       - "danger_more_abuse_children": ${ danger_more_abuse_who["children"] }
       - "danger_more_abuse_users1": ${ danger_more_abuse_who["users1"] }
