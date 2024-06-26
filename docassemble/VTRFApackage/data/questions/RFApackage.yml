@@ -1015,7 +1015,7 @@ fields:
 
       ${ collapse_template(stalking) }
       
-      Check all that apply to this incident. Select at least one statement.
+      **Check all that apply to this incident.** Select at least one statement.
 
   - "The defendant caused or attempted to cause physical harm": recent_incident_harm
     datatype: yesno
