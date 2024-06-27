@@ -1494,31 +1494,6 @@ fields:
     js show if: |
       val("existing_order['existing_order_divorce']") || val("existing_order['dissolution']") || val("existing_order['existing_order_RFA']") || val("existing_order['criminal_proceeding']") || val("existing_order['parentage_order']") || val("existing_order['guardianship_order']") || val("existing_order['juvenile_order']") || val("existing_order['child_support_order']") 
 ---
-#variable name: existing_order_text
-#use objects: True
-#data:
-#  existing_order_divorce:
-#    question: For divorce or separation?
-#    document: For divorce or separation?
-#  existing_order_RFA:
-#    question: For a civil union dissolution?
-#    document: For a civil union dissolution?       
-#  criminal_proceeding:
-#    question: For a criminal matter?  
-#    document: For a criminal matter?
-#  parentage_order:
-#    question: For parentage?  
-#    document: For parentage?
-#  guardianship_order:
-#    question: For guardianship?  
-#    document: For guardianship?
-#  juvenile_order:
-#    question: For a juvenile (DCF) matter?
-#    document: For a juvenile (DCF) matter?
-#  child_support_order: 
-#    question: For child support?
-#    document: For child support?
----
 id: About your home
 question: |
   Asking to have the defendant removed from your home  
@@ -1837,25 +1812,6 @@ fields:
     datatype: yesno
   - "Contacts": lenses_contacts
     datatype: yesno
----
-#variable name: race_text
-#use objects: True
-#data:
-#  race_white:
-#    question: White
-#    document: White
-#  race_black:
-#    question: Black
-#    document: Black     
-#  race_native:
-#    question: Native American 
-#    document: Native American
-#  race_asian:
-#    question: Asian  
-#    document: Asian
-#  race_other:
-#    question: Other 
-#    document: Other
 ---
 id: More about what the defendant looks like
 question: |
