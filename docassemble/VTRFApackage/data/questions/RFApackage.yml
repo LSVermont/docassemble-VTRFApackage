@@ -2654,15 +2654,19 @@ review:
       
       - The defendant sexually assaulted you and/or the child/children: **${ yesno(recent_incident_assault) }**
       
-      - The defendant sexually assault you: **${ yesno(recent_incident_assault_users1) }**
+      - The defendant sexually assaulted you: **${ yesno(recent_incident_assault_users1) }**
       
-      - The defendant sexually assault the child/children: **${ yesno(recent_incident_assault_children) }**
+      - The defendant sexually assaulted the child/children: **${ yesno(recent_incident_assault_children) }**
       
       % endif
 
       % if defined("recent_incident_coercive") and recent_incident_coercive:
       
       - The defendant coercively controlled you and/or the child/children: **${ yesno(recent_incident_coercive) }**
+      
+      - The defendant coercively controlled you: **${ yesno(recent_incident_coercive_users1) }**
+      
+      - The defendant coercively controlled the child/children: **${ yesno(recent_incident_coercive_children) }**
       
       % endif
 
@@ -2683,10 +2687,12 @@ review:
 
       - Town of the most serious incident: **${ showifdef('serious_incident_town') }**
       
-      % if defined('other_serious_incident_state'):
-      - Province/state/country of the most serious incident if outside of the U.S.: **${ showifdef('other_serious_incident_state') }**
-      % else:
-      - State of the most serious incident: **${ showifdef('serious_incident_state') }**
+       % if serious_incident_state:
+      - State of the most recent incident: **${ serious_incident_state }**
+      % endif
+      
+       % if other_serious_incident_state:
+      - Province/state/country of the most recent incident if outside of the U.S.: **${ other_serious_incident_state }**
       % endif
       
       - Most serious incident description: **${ showifdef('serious_incident_description') }**
@@ -2713,8 +2719,10 @@ review:
       - There is immediate danger of more abuse from the defendant: **${ yesno(danger_more_abuse) }**
       
       % if danger_more_abuse:
-      % if defined('danger_more_abuse_why'):
+      % if danger_more_abuse_why:
       - Information not already described before: **${ danger_more_abuse_why }**
+      % else:
+      - Information not already described before: **None**
       % endif
       % endif
       
