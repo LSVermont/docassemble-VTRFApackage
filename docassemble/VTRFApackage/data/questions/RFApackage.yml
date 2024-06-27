@@ -817,25 +817,14 @@ fields:
 template: coercive_control
 subject: About coercive control
 content: |
-  Vermont law now includes coercive controlling behavior as abuse. Here is the statute.
+  Vermont law now includes coercive controlling behavior as abuse. 
+
+  Coercive control is a pattern of behavior that seeks to take away your liberty or freedom and to strip away your sense of self. This ongoing pattern of abuse aims to dominate and control you. Coercive control is a form of emotional and psychological abuse. It can hurt your mental and emotional well-being.
   
-  (2) “Coercive controlling behavior” means a pattern of behavior that in purpose or effect **unreasonably** interferes with a person’s free will and personal liberty.  “Coercive controlling behavior” includes unreasonably engaging in any of the following:
+  To prove coercive control, you must show a pattern of behavior. This means you have experienced these behaviors more than once.
   
-  (A) isolating the family or household member from friends, relatives or other sources of support;
-  
-  (B) depriving the family or household member of basic necessities;
-  
-  (C) controlling, regulating or monitoring the family or household member’s movements, communications, daily behavior, finances, economic resources, or access to services;
-  
-  (D) compelling the family or household member by force, threat or intimidation, including threats based on actual or suspected immigration status, to:
-  
-    * (i) engage in conduct from which such family or household member has a right to abstain; or
-  
-    * (ii) abstain from conduct that such family or household member has a right to pursue;
-  
-  (E) committing or threatening to commit cruelty to animals that intimidates the family or household member; or
-  
-  (F) forced sex acts or threats of a sexual nature, including threatened acts of sexual conduct, threats based on a person’s sexuality, or threats to release sexual images.
+  [Learn more on the VTLawHelp.org website.](https://vtlawhelp.org/coercive-control)
+
 
 ---
 template: stalking
@@ -1064,7 +1053,17 @@ fields:
 
   - "The defendant coercively controlled you and/or the child/children. Coercive control is defined in Vermont law here: [15 V.S.A. § 1101(2)](https://legislature.vermont.gov/statutes/section/15/021/01101)": recent_incident_coercive
     datatype: yesno
-
+  - "The defendant coercively controlled you": recent_incident_coercive_users1
+    datatype: yesnoradio
+    css class: indent-me
+    show if: recent_incident_coercive
+  - "The defendant coercively controlled the child/children": recent_incident_coercive_children
+    datatype: yesnoradio
+    css class: indent-me
+    show if: recent_incident_coercive
+  - note: |
+      ---
+    show if: recent_incident_assault
   - "When did this abusive behavior first start?": recent_incident_coercive_start_date
     maxlength: 14
     show if: recent_incident_coercive  
@@ -1092,6 +1091,9 @@ fields:
   - "Describe the most recent incident with as much detail as possible.": recent_incident_description
     input type: area
     rows: 20
+  - note: |
+      If alleging coercive control, describe the behavior of the defendant. Remember, to prove coercive control, you must show a pattern of behavior. This means you have experienced these behaviors more than once.
+    show if: recent_incident_coercive
   - You were the target of the recent abuse: recent_incident_users1
     datatype: yesnoradio  
   - Your children were the target of the recent abuse: recent_incident_children
@@ -2193,6 +2195,10 @@ review:
       - Other phone: **${ showifdef('other_parties1_other_phone_number') }**  
       % endif
 
+      % if other_parties[0].phone_number == '' and other_parties[0].mobile_number == '' and other_parties1_work_phone_number == '' and other_parties1_other_phone_number == '':
+      - Phone number: **Unknown**
+      % endif
+      
   - Edit: 
     - house
     - best_contact_time
@@ -3225,7 +3231,12 @@ attachment:
       - "existing_order_users_attorney": ${ existing_order_users_attorney }
       - "existing_order_OP_attorney": ${ existing_order_OP_attorney }
       - "recent_incident_yes": ${ True }
-      - "recent_incident_date": ${ recent_incident_date }
+      - "recent_incident_date": |
+          % if defined('recent_incident_coercive_start_date'):
+          ${ recent_incident_coercive_start_date } to ${ recent_incident_date }
+          % else:
+          ${ recent_incident_date }
+          % endif 
       - "recent_incident_coercive_start_date": ${ recent_incident_coercive_start_date }
       - "recent_incident_users1": ${ recent_incident_users1 }
       - "recent_incident_children": ${ recent_incident_children }
@@ -3247,6 +3258,8 @@ attachment:
       - "recent_incident_assault": ${ recent_incident_assault }
       - "recent_incident_assault_users1": ${ recent_incident_assault_users1 }
       - "recent_incident_coercive": ${ recent_incident_coercive }
+      - "recent_incident_coercive_users1": ${ recent_incident_coercive_users1 }
+      - "recent_incident_coercive_children": ${ recent_incident_coercive_children }
       - "danger_more_abuse": ${ danger_more_abuse }
       - "danger_more_abuse_children": ${ danger_more_abuse_who["children"] }
       - "danger_more_abuse_users1": ${ danger_more_abuse_who["users1"] }
@@ -3388,7 +3401,12 @@ attachment:
           % else: 
           ${ other_parties[0].address.zip }
           % endif 
-      - "recent_incident_date": ${ recent_incident_date }
+      - "recent_incident_date": |
+          % if defined('recent_incident_coercive_start_date'):
+          ${ recent_incident_coercive_start_date } to ${ recent_incident_date }
+          % else:
+          ${ recent_incident_date }
+          % endif 
       - "recent_incident_time": ${ recent_incident_time }
       - "recent_incident_town": ${ recent_incident_town }
       - "recent_incident_state": |
