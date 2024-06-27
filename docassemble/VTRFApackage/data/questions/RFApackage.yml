@@ -1,4 +1,6 @@
 #THIS VERSION IS FOR JULY 1, 2024, WHEN COERCIVE CONTROLLING BEHAVIOR IS ADDED AS FORM OF ABUSE
+#Add form numbers to meta description when we get new forms.
+
 
 # This interview does not make use of VTSharedYMLFile because that shared file was made after this interview went live.
 ---
@@ -100,7 +102,7 @@ data:
   short title: >-
     RFA package
   description: |-
-    Ask the court for a Relief from Abuse (RFA) order. This one interview will help you complete four required forms.
+    Ask the court for a Relief from Abuse (RFA) order. This one interview will help you complete four required forms. Based on paper versions of forms.
   original_form: >-
     https://vtlawhelp.org/roadmap/relief-from-abuse/step-3
   allowed courts: 
@@ -329,6 +331,7 @@ code: |
           "county_where_filing": showifdef("trial_court.address.county"),          
           "reached_interview_end": True,
           "number_of_forms": len(al_user_bundle.enabled_documents()),
+          "number_of_kids_in_this_case": showifdef("children.target_number"),
       },
   )
   nav.set_section('get_docs')
@@ -1012,7 +1015,7 @@ fields:
 
       ${ collapse_template(stalking) }
       
-      Check all that apply to this incident. Select at least one statement.
+      **Check all that apply to this incident.** Select at least one statement.
 
   - "The defendant caused or attempted to cause physical harm": recent_incident_harm
     datatype: yesno
@@ -1491,31 +1494,6 @@ fields:
     js show if: |
       val("existing_order['existing_order_divorce']") || val("existing_order['dissolution']") || val("existing_order['existing_order_RFA']") || val("existing_order['criminal_proceeding']") || val("existing_order['parentage_order']") || val("existing_order['guardianship_order']") || val("existing_order['juvenile_order']") || val("existing_order['child_support_order']") 
 ---
-#variable name: existing_order_text
-#use objects: True
-#data:
-#  existing_order_divorce:
-#    question: For divorce or separation?
-#    document: For divorce or separation?
-#  existing_order_RFA:
-#    question: For a civil union dissolution?
-#    document: For a civil union dissolution?       
-#  criminal_proceeding:
-#    question: For a criminal matter?  
-#    document: For a criminal matter?
-#  parentage_order:
-#    question: For parentage?  
-#    document: For parentage?
-#  guardianship_order:
-#    question: For guardianship?  
-#    document: For guardianship?
-#  juvenile_order:
-#    question: For a juvenile (DCF) matter?
-#    document: For a juvenile (DCF) matter?
-#  child_support_order: 
-#    question: For child support?
-#    document: For child support?
----
 id: About your home
 question: |
   Asking to have the defendant removed from your home  
@@ -1834,25 +1812,6 @@ fields:
     datatype: yesno
   - "Contacts": lenses_contacts
     datatype: yesno
----
-#variable name: race_text
-#use objects: True
-#data:
-#  race_white:
-#    question: White
-#    document: White
-#  race_black:
-#    question: Black
-#    document: Black     
-#  race_native:
-#    question: Native American 
-#    document: Native American
-#  race_asian:
-#    question: Asian  
-#    document: Asian
-#  race_other:
-#    question: Other 
-#    document: Other
 ---
 id: More about what the defendant looks like
 question: |
