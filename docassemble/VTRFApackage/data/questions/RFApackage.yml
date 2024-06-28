@@ -2621,7 +2621,11 @@ review:
       - Your children were the target of the recent abuse: **${ yesno(recent_incident_children) }**
       
       % if recent_incident_children:
-      - The children who were the target of the recent abuse: ${ showifdef('recent_incident_other_children') }  **${ showifdef('recent_incident_children_names') }** 
+      - The children who were the target of the recent abuse: 
+      **${ showifdef('recent_incident_children_names') }** 
+      % if defined('recent_incident_other_children'):
+      **, ${ showifdef('recent_incident_other_children') }**
+      % endif
       % endif
       
       % if recent_incident_harm:
