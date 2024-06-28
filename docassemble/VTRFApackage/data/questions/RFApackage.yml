@@ -2621,7 +2621,11 @@ review:
       - Your children were the target of the recent abuse: **${ yesno(recent_incident_children) }**
       
       % if recent_incident_children:
-      - The children who were the target of the recent abuse: ${ showifdef('recent_incident_other_children') }  **${ showifdef('recent_incident_children_names') }** 
+      - The children who were the target of the recent abuse: 
+      **${ showifdef('recent_incident_children_names') }** 
+      % if defined('recent_incident_other_children'):
+      **, ${ showifdef('recent_incident_other_children') }**
+      % endif
       % endif
       
       % if recent_incident_harm:
@@ -3239,7 +3243,7 @@ attachment:
       - "recent_incident_yes": ${ True }
       - "recent_incident_date": |
           % if defined('recent_incident_coercive_start_date'):
-          ${ recent_incident_coercive_start_date } to ${ recent_incident_date }
+          ${ recent_incident_coercive_start_date } - ${ recent_incident_date }
           % else:
           ${ recent_incident_date }
           % endif 
@@ -3410,7 +3414,7 @@ attachment:
           % endif 
       - "recent_incident_date": |
           % if defined('recent_incident_coercive_start_date'):
-          ${ recent_incident_coercive_start_date } to ${ recent_incident_date }
+          ${ recent_incident_coercive_start_date } - ${ recent_incident_date }
           % else:
           ${ recent_incident_date }
           % endif 
