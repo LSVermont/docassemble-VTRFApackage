@@ -1,6 +1,4 @@
 #THIS VERSION IS FOR JULY 1, 2024, WHEN COERCIVE CONTROLLING BEHAVIOR IS ADDED AS FORM OF ABUSE
-#Add form numbers to meta description when we get new forms.
-
 
 # This interview does not make use of VTSharedYMLFile because that shared file was made after this interview went live.
 ---
@@ -102,7 +100,7 @@ data:
   short title: >-
     RFA package
   description: |-
-    Ask the court for a Relief from Abuse (RFA) order. This one interview will help you complete four required forms. Based on paper versions of forms.
+    Ask the court for a Relief from Abuse (RFA) order. This one interview will help you complete four required forms. Based on paper versions of forms 400-00151 (7/2024) and 400-00150C (7/2024).
   original_form: >-
     https://vtlawhelp.org/roadmap/relief-from-abuse/step-3
   allowed courts: 
@@ -821,7 +819,7 @@ content: |
 
   Coercive control is a pattern of behavior that seeks to take away your liberty or freedom and to strip away your sense of self. This ongoing pattern of abuse aims to dominate and control you. Coercive control is a form of emotional and psychological abuse. It can hurt your mental and emotional well-being.
   
-  To prove coercive control, you must show a pattern of behavior. This means you have experienced these behaviors more than once.
+  To prove coercive control, you must show a pattern of behavior. This means you have experienced the behavior more than once.
   
   [Learn more on the VTLawHelp.org website.](https://vtlawhelp.org/coercive-control)
 
