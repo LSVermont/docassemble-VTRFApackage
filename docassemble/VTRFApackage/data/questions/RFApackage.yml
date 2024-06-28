@@ -3239,7 +3239,7 @@ attachment:
       - "recent_incident_yes": ${ True }
       - "recent_incident_date": |
           % if defined('recent_incident_coercive_start_date'):
-          ${ recent_incident_coercive_start_date } to ${ recent_incident_date }
+          ${ recent_incident_coercive_start_date } - ${ recent_incident_date }
           % else:
           ${ recent_incident_date }
           % endif 
@@ -3410,7 +3410,7 @@ attachment:
           % endif 
       - "recent_incident_date": |
           % if defined('recent_incident_coercive_start_date'):
-          ${ recent_incident_coercive_start_date } to ${ recent_incident_date }
+          ${ recent_incident_coercive_start_date } - ${ recent_incident_date }
           % else:
           ${ recent_incident_date }
           % endif 
