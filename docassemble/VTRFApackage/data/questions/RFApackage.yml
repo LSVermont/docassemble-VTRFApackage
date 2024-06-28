@@ -3367,6 +3367,7 @@ attachment:
       - "request_all_emergency": ${ request_all_emergency }
       - "signature_date": ${ format_date(signature_date, format='M/d/yyyy') }
       - "users1_signature": ${ users[0].signature_if_final(i) }
+      - "printed_signature": ${ printed_signature }
 ---
 attachment:
   name: 3 RFA-affidavit
