@@ -3378,6 +3378,7 @@ attachment:
   filename: 3_RFA-affidavit
   variable name: RFAaffidavit[i]
   skip undefined: True
+  editable: False
   pdf template file: 3_RFA-affidavit.pdf
   fields:
       - "docket_number": ${ docket_number }
